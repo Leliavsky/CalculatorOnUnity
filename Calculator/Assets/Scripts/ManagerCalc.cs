@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +7,6 @@ public class ManagerCalc : MonoBehaviour
     public VerticalLayoutGroup buttonGroup;
     public HorizontalLayoutGroup bottomRow;
     public RectTransform canvasRect;
-    CalcButton[] bottomButtons;
 
     public Text digitLabel;
     public Text operatorLabel;
@@ -23,14 +20,8 @@ public class ManagerCalc : MonoBehaviour
     char storedOperator;
     string hist;
 
-    private void Awake()
-    {
-        bottomButtons = bottomRow.GetComponentsInChildren<CalcButton>();
-    }
-
     void Start()
     {
-        bottomRow.childControlWidth = false;
         buttonTapped('c');
     }
 
@@ -61,7 +52,6 @@ public class ManagerCalc : MonoBehaviour
         {
             case '=':
                 result = currentVal;
-                //digitHistory.text += result;
                 break;
             case '+':
                 result = storedVal + currentVal;
@@ -105,8 +95,6 @@ public class ManagerCalc : MonoBehaviour
                 else if (digitLabel.text == "0" && caption != '.')
                     digitLabel.text = "";
                 digitLabel.text += caption;
-
-                //digitHistory.text += caption;
                 displayValid = true;
             }
         }
@@ -137,9 +125,6 @@ public class ManagerCalc : MonoBehaviour
                 storedOperator = ' ';
             }
             operatorLabel.text = caption.ToString();
-
-            //digitHistory.text += caption.ToString();
-            
             storedOperator = caption;
             storedVal = currentVal;
             updateDigitLabel();
@@ -197,7 +182,7 @@ public class ManagerCalc : MonoBehaviour
         else if (caption != '=')
         {
             hist += caption;
-        } 
+        }
         else if(caption == '=') 
         {
             digitHistory.text += hist;
@@ -207,3 +192,4 @@ public class ManagerCalc : MonoBehaviour
         }
     }
 }
+
